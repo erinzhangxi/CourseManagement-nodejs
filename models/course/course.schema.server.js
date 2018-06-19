@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var courseSchema = mongoose.Schema({
     name: String,
-    courseId: Number
+    courseId: String
 }, {collection: 'course'});
 module.exports = courseSchema;
