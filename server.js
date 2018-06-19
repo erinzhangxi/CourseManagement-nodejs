@@ -20,8 +20,6 @@ app.use(function(req, res, next) {
 });
 
 
-
-
 var session = require('express-session')
 app.use(session({
   resave: false,
@@ -63,5 +61,8 @@ function getSession(req, res) {
 
 var userService = require('./services/user.service.server');
 userService(app);
+
+
+require('./services/section.service.server')(app);
 
 app.listen(4000)
