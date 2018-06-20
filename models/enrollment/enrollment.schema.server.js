@@ -9,5 +9,5 @@ var enrollmentSchema = mongoose.Schema({
         ref: 'UserModel'
     },
     grade: String
-}, {collection: 'enrollments'});
+}, {collection: 'enrollment'});
 module.exports = enrollmentSchema;

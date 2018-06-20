@@ -44,6 +44,15 @@ function updateUser(userId, newUser) {
     return userModel.update({_id: userId}, {$set:newUser});
 }
 
+function addSectionToUser(userId, sectionId) {
+    return userModel.update(
+        {_id: userId},
+        {$set:
+                {
+                    'sections.0': sectionId
+                }});
+}
+
 
 var api = {
     createUser: createUser,
@@ -52,7 +61,8 @@ var api = {
     deleteUser: deleteUser,
     updateUser: updateUser,
     findUserByCredentials: findUserByCredentials,
-    findUserByUsername: findUserByUsername
+    findUserByUsername: findUserByUsername,
+    addSectionToUser: addSectionToUser
 };
 
 module.exports = api;

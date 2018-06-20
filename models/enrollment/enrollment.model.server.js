@@ -15,8 +15,12 @@ function findSectionsForStudent(studentId) {
         .populate('section')
         .exec();
 }
+function findAllEnrollments() {
+    return enrollmentModel.findAllEnrollments();
+}
 
 module.exports = {
     enrollStudentInSection: enrollStudentInSection,
-    findSectionsForStudent: findSectionsForStudent
+    findSectionsForStudent: findSectionsForStudent,
+    findAllEnrollments: findAllEnrollments
 };

@@ -30,10 +30,15 @@ function removeSection(section) {
     return sectionModel.remove(section);
 }
 
+function findSectionById(sectionId) {
+    return sectionModel.findOne(sectionId);
+}
+
 module.exports = {
     createSection: createSection,
     findSectionsForCourse: findSectionsForCourse,
     decrementSectionSeats: decrementSectionSeats,
     incrementSectionSeats: incrementSectionSeats,
-    removeSection: removeSection
+    removeSection: removeSection,
+    findSectionById: findSectionById
 };

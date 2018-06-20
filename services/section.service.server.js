@@ -5,10 +5,13 @@ module.exports = function (app) {
     app.get('/api/course/:courseId/section', findSectionsForCourse);
     app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
     app.get('/api/student/section', findSectionsForStudent);
+    app.get('api/enrollment', findAllEnrollments);
+    app.get('api/section/:sectionId', findSectionById);
 
     var sectionModel = require('../models/section/section.model.server');
     var courseModel = require('../models/course/course.model.server');
     var enrollmentModel = require('../models/enrollment/enrollment.model.server');
+    var userModel = require('../models/user/user.model.server');
 
     function createCourse(req, res) {
         var course = req.body;
@@ -56,6 +59,13 @@ module.exports = function (app) {
             .then(function (enrollment) {
                 res.json(enrollment);
             })
+
+        var currentUser = req.session.currentUser;
+        userModel
+            .addSectionToUser(currentUser._id, sectionId)
+            .then(function(user) {
+                res.json(user);
+            });
     }
 
     function findSectionsForCourse(req, res) {
@@ -64,6 +74,22 @@ module.exports = function (app) {
             .findSectionsForCourse(courseId)
             .then(function (sections) {
                 res.json(sections);
+            })
+    }
+
+    function findSectionById(req, res) {
+        var sectionId = req.params['sectionId'];
+        sectionModel
+            .findSectionById(sectionId)
+            .then(function (section) {
+            res.json(section);
+        })
+    }
+    function findAllEnrollments(req, res) {
+        enrollmentModel
+            .findAllEnrollments()
+            .then(function (enrollments) {
+                res.json(enrollments);
             })
     }
 
