@@ -50,6 +50,7 @@ module.exports = function (app) {
             section: sectionId
         };
 
+
         sectionModel
             .decrementSectionSeats(sectionId)
             .then(function () {

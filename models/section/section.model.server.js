@@ -11,6 +11,7 @@ function findSectionsForCourse(courseId) {
 }
 
 function decrementSectionSeats(sectionId) {
+
     return sectionModel.update({
         _id: sectionId
     }, {
