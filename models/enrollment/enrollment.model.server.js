@@ -9,6 +9,10 @@ function enrollStudentInSection(enrollment) {
     return enrollmentModel.create(enrollment);
 }
 
+function unrollStudentInSection(enrollment) {
+    return enrollmentModel.delete(enrollment);
+}
+
 function findSectionsForStudent(studentId) {
     return enrollmentModel
         .find({student: studentId})
@@ -22,5 +26,6 @@ function findAllEnrollments() {
 module.exports = {
     enrollStudentInSection: enrollStudentInSection,
     findSectionsForStudent: findSectionsForStudent,
-    findAllEnrollments: findAllEnrollments
+    findAllEnrollments: findAllEnrollments,
+    unrollStudentInSection: unrollStudentInSection
 };

@@ -53,6 +53,18 @@ function addSectionToUser(userId, sectionId) {
                 }});
 }
 
+function removeSectionFromUser(userId, sectionId) {
+    console.log("remove section from user " + userId + sectionId);
+
+    return userModel.update(
+        {_id: userId},
+        {$pullAll: {
+                sections: [sectionId]
+            }
+        }
+    );
+}
+
 
 var api = {
     createUser: createUser,
@@ -62,7 +74,8 @@ var api = {
     updateUser: updateUser,
     findUserByCredentials: findUserByCredentials,
     findUserByUsername: findUserByUsername,
-    addSectionToUser: addSectionToUser
+    addSectionToUser: addSectionToUser,
+    removeSectionFromUser: removeSectionFromUser
 };
 
 module.exports = api;

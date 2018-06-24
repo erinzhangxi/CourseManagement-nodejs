@@ -6,6 +6,7 @@ module.exports = function (app) {
     app.get('/api/profile', profile);
     app.post('/api/logout', logout);
     app.put('/api/profile', updateProfile);
+    app.get('/api/session/get/user', checkUserStatus);
 
     var userModel = require('../models/user/user.model.server');
 
@@ -19,7 +20,7 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.session.destroy();
-        res.send(200);
+        res.sendStatus(200);
     }
 
     function updateProfile(req, res) {
@@ -59,5 +60,26 @@ module.exports = function (app) {
                 req.session['currentUser'] = user;
                 res.send(user);
             })
+    }
+
+    // function checkUserStatus(req, res) {
+    //     console.log(req.session['currentUser']);
+    //     console.log("PRINTINg");
+    //     if (req.session && req.session.user) {
+    //         res.send({isLoggedIn: true});
+    //     }
+    //     else {
+    //         res.sendStatus(404);
+    //     }
+    //     // res.send(JSON.stringify({"isLoggedIn": true}));
+    //     // res.send(req.session['currentUser']);
+    // }
+
+    function checkUserStatus(req, res) {
+        if (req.session['currentUser'] !== undefined) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(404);
+        }
     }
 }
