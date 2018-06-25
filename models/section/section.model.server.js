@@ -35,11 +35,23 @@ function findSectionById(sectionId) {
     return sectionModel.findOne(sectionId);
 }
 
+function updateSection(section, sectionId) {
+    return sectionModel.update(
+        {
+            _id: sectionId
+        },
+        {section},
+        { upsert: true }
+    );
+}
+
 module.exports = {
     createSection: createSection,
     findSectionsForCourse: findSectionsForCourse,
     decrementSectionSeats: decrementSectionSeats,
     incrementSectionSeats: incrementSectionSeats,
     removeSection: removeSection,
-    findSectionById: findSectionById
+    findSectionById: findSectionById,
+    updateSection: updateSection
+
 };
