@@ -53,6 +53,17 @@ function addSectionToUser(userId, sectionId) {
                 }});
 }
 
+
+function addCourseToUser(userId, courseId) {
+    return userModel.update(
+        {_id: userId},
+        {$set:
+                {
+                    'courses.0': courseId
+                }});
+}
+
+
 function removeSectionFromUser(userId, sectionId) {
     console.log("remove section from user " + userId + sectionId);
 
@@ -75,6 +86,7 @@ var api = {
     findUserByCredentials: findUserByCredentials,
     findUserByUsername: findUserByUsername,
     addSectionToUser: addSectionToUser,
+    addCourseToUser: addCourseToUser,
     removeSectionFromUser: removeSectionFromUser
 };
 

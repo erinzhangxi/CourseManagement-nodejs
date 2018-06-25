@@ -58,28 +58,31 @@ module.exports = function (app) {
         userModel.findUserByCredentials(user.username, user.password)
             .then(function (user) {
                 req.session['currentUser'] = user;
+                console.log(req.session);
                 res.send(user);
             })
     }
 
+    function checkUserStatus(req, res) {
+        console.log(JSON.stringify(req.session) + " TEST " + JSON.stringify(req.session['currentUser']));
+        if (req.session && req.session['currentUser']) {
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(400);
+        }
+        // res.send(JSON.stringify({"isLoggedIn": true}));
+        // res.send(req.session['currentUser']);
+    }
+
     // function checkUserStatus(req, res) {
-    //     console.log(req.session['currentUser']);
-    //     console.log("PRINTINg");
-    //     if (req.session && req.session.user) {
-    //         res.send({isLoggedIn: true});
-    //     }
-    //     else {
+    //     console.log("CHECK USE IS CALLED");
+    //     if (req.session['currentUser'] !== undefined) {
+    //     console.log("200");
+    //         res.sendStatus(200);
+    //     } else {
+    //         console.log("404");
     //         res.sendStatus(404);
     //     }
-    //     // res.send(JSON.stringify({"isLoggedIn": true}));
-    //     // res.send(req.session['currentUser']);
     // }
-
-    function checkUserStatus(req, res) {
-        if (req.session['currentUser'] !== undefined) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(404);
-        }
-    }
 }
